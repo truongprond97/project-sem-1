@@ -2,12 +2,12 @@
   "name": "teahouse-1.0.0",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "public/index.js",
   "directories": {
     "lib": "assets/lib"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node public/index.js"
   },
   "author": "",
   "license": "ISC",
