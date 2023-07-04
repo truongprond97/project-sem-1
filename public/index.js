@@ -7,6 +7,14 @@ const {join} = require("path");
 
 const app = express();
 
+const PORT = process.env.PORT || 3030;
+
+// your code
+
+app.listen(PORT, () => {
+  console.log(`server started on port ${PORT}`);
+});
+
 // 1) MIDDLEWARES
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
