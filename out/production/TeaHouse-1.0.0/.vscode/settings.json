@@ -1,0 +1,18 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "103.107.182.219",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "phucLqDb",
+            "database": "smdb",
+            "username": "root",
+            "password": "yuufboRwtdkw5y3V23MbkU3"
+        }
+    ]
+}
