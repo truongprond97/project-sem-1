@@ -77,6 +77,7 @@ app.get('/404', (req, res) => {
 
 app.use('/store', productRoute)
 
+
 app.set('view engine', 'ejs');
 
 const productData = require('./products.js')
