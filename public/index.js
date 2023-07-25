@@ -4,6 +4,8 @@ const express = require('express');
 const {join} = require("path");
 const connection = require("./db.js");
 
+const productRoute = require('../src/route/product')
+
 const app = express();
 
 // 1) MIDDLEWARES
@@ -59,10 +61,9 @@ app.get('/contact', (req, res) => {
   // res.status(200).sendFile(`${__dirname}/html/contact.html`, 'utf-8')
 })
 
-app.get('/store', (req, res) => {
-  res.status(200).render('store');
-  // res.status(200).sendFile(`${__dirname}/html/store.html`, 'utf-8')
-})
+// app.get('/store', (req, res) => {
+  
+// })
 
 app.get('/about', (req, res) => {
   res.status(200).render('about');
@@ -74,11 +75,8 @@ app.get('/404', (req, res) => {
   // res.status(200).sendFile(`${__dirname}/html/404.html`, 'utf-8')
 })
 
-// app.use(function(req, res, next) {
-//     res.status(404);
-//     res.json({status:404,title:"Not Found",msg:"Route not found"});
-//     next();
-// });
+app.use('/store', productRoute)
+
 app.set('view engine', 'ejs');
 
 const productData = require('./products.js')
