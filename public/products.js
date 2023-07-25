@@ -34,3 +34,13 @@ module.exports ={
   products,
   addProduct
 }
+
+const product = document.getElementById('product');
+getDataFromPublicAPI();
+
+async function getDataFromPublicAPI() {
+  const responseAPI = await fetch('https://jewelly-f94d514b961f.herokuapp.com/api/v1/product');
+  console.log('responseAPI :>> ', responseAPI);
+  const data = await responseAPI.json;
+  console.log('data :>> ', data);
+}
