@@ -1,0 +1,126 @@
+<div class="position-relative ">
+    <div class="row m-0 filter-bar cursor-pointer">
+        <div class="col-6">
+            <a onclick="onClickSelection(event)" href="javascript:void(0)">
+                Category
+            </a>
+        </div>
+        <div class="col-6">
+            <a href="javascript:void(0)" onclick="onClickSelection(event)">
+                Branch
+            </a>
+        </div>
+    </div>
+    <div class="row position-absolute m-0 w-100 filter-bar selection" id="detail-selection">
+        <div class="col-6">
+
+            <% category.forEach( (val, index) => { %>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="<%= val.id %>" name="category-checkbox"
+                           id="category-checkbox-<%= index %>">
+                    <label class="form-check-label" for="category-checkbox-<%= index %>">
+                        <%= val.name %>
+                    </label>
+                </div>
+
+            <% }) %>
+
+        </div>
+        <div class="col-6">
+
+            <% branch.forEach( (val, index) => { %>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="<%= val.id %>"
+                           name="branch-checkbox"
+                           id="branch-checkbox-<%= index %>">
+                    <label class="form-check-label" for="branch-checkbox-<%= index %>">
+                        <%= val.name %>
+                    </label>
+                </div>
+
+            <% }) %>
+
+        </div>
+
+        <div class="col-12 row mt-3">
+            <div class="col-3">
+                <button type="button" onclick="passDataToParams(event)" class="btn btn-primary">Apply</button>
+            </div>
+            <div class="col-3"></div>
+            <div class="col-3">
+                <button type="button" class="btn btn-secondary">Reset</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    const detailSelection = document.querySelector('#detail-selection')
+
+    const url = new URL(location.href)
+    const inputParams = new URLSearchParams(url.search)
+
+    const branchEls = document.querySelectorAll('input[name="branch-checkbox"]')
+    const categoryEls = document.querySelectorAll('input[name="category-checkbox"]')
+
+    try {
+
+        console.log(inputParams.has('category'))
+        if (inputParams.has('category')) {
+            const paramCategory = inputParams.get('category')
+            const els = Array.from(categoryEls)
+            if (Array.isArray(paramCategory)) {
+                paramCategory.forEach(
+                    (params) => {
+                        const el = els.find(val => val.value === params)
+                        if (el) el.checked = true
+                    }
+                )
+            } else if (!!paramCategory) {
+                const el = els.find(val => val.value === paramCategory)
+                if (el) el.checked = true
+            }
+        }
+
+        if (inputParams.has('branch')) {
+            const paramBranch = inputParams.get('branch')
+            const els = Array.from(branchEls)
+            if (Array.isArray(paramBranch)) {
+                paramBranch.forEach(
+                    (params) => {
+                        const el = els.find(val => val.value === params)
+                        if (el) el.checked = true
+
+                    }
+                )
+            } else if (!!paramBranch) {
+                const el = els.find(val => val.value === paramBranch)
+                if (el) el.checked = true
+
+            }
+        }
+    } catch (e) {
+        console.error(e)
+    }
+
+
+    const onClickSelection = (event) => {
+        event.preventDefault()
+        detailSelection.classList.toggle('show')
+    }
+
+    const passDataToParams = (event) => {
+        console.log(event)
+        event.preventDefault()
+        const branches = Array.from(document.querySelectorAll('input[name="branch-checkbox"]:checked'))
+        const categories = Array.from(document.querySelectorAll('input[name="category-checkbox"]:checked'))
+        inputParams.delete('category', null)
+        inputParams.delete('branch', null)
+
+        categories.forEach(value => inputParams.append('category', value.value))
+        branches.forEach(value => inputParams.append('branch', value.value))
+
+        url.search = inputParams.toString()
+        window.history.replaceState({path: url.toString()}, '', url.toString())
+    }
+</script>

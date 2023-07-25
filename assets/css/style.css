@@ -190,7 +190,7 @@
         position: relative;
         min-height: 450px;
     }
-    
+
     #header-carousel .carousel-item img {
         position: absolute;
         width: 100%;
@@ -504,4 +504,28 @@
 
 .copyright a:hover {
     color: #FFFFFF !important;
+}
+
+.filter-bar {
+    padding: 18px;
+    border-bottom: 1px solid #a7db7d;
+}
+
+.filter-bar.selection {
+    display: none;
+    background: white;
+    z-index: 3;
+}
+
+.filter-bar.selection.show {
+    display: flex ;
+    flex-wrap: wrap;
+}
+
+.filter-bar ~ .filter-bar {
+    border-top: 1px solid #a7db7d;
+}
+
+.cursor-pointer{
+    cursor: pointer;
 }
