@@ -5,14 +5,16 @@ const {join} = require("path");
 const connection = require("./db.js");
 
 const productRoute = require('../src/route/product')
+const cartRoute = require('../src/route/cart')
+const apiRoute = require('../src/route/api')
 
 const app = express();
 
 // 1) MIDDLEWARES
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-
-}
+// if (process.env.NODE_ENV === 'development') {
+//   app.use(morgan('dev'));
+//
+// }
 
 app.use(express.json());
 app.use(express.static(`${__dirname}/css`));
@@ -35,47 +37,31 @@ app.use((req, res, next) => {
 app.use("/assets", express.static('assets'));
 
 app.get('/', (req, res) => {
-
   res.status(200).render('home');
-  // res.status(200).sendFile(`${__dirname}/html/index.html`, 'utf-8')
 })
 
 app.get('/product', (req, res) => {
   connection.query('select * from product', (err, results) => {
-    console.log(results)
     res.status(200).render('products');
-    // res.status(200).sendFile(`${__dirname}/html/product.html`, 'utf-8')
   })
-  // connection().then(
-  //     (val) => {
-  //         val.query('select * from product', (err, results) =>  {
-  //                 console.log("ok")
-  //             })
-  //     }
-  // )
-
 })
 
 app.get('/contact', (req, res) => {
   res.status(200).render('contact');
-  // res.status(200).sendFile(`${__dirname}/html/contact.html`, 'utf-8')
 })
 
-// app.get('/store', (req, res) => {
-  
-// })
 
 app.get('/about', (req, res) => {
   res.status(200).render('about');
-  // res.status(200).sendFile(`${__dirname}/html/about.html`, 'utf-8')
 })
 
 app.get('/404', (req, res) => {
   res.status(200).render('404');
-  // res.status(200).sendFile(`${__dirname}/html/404.html`, 'utf-8')
 })
 
 app.use('/store', productRoute)
+app.use('/cart', cartRoute)
+app.use('/api', apiRoute)
 
 
 app.set('view engine', 'ejs');
@@ -113,10 +99,7 @@ app.get('/test',  (req, res) => {
 
 app.use('**/**', express.static(join(__dirname, './html/404.html')));
 
-//
-// connection.ping(() => {
-//     console.log('alo')
-// })
+
 const hostName = "127.0.0.1"
 const port = 8081
 
