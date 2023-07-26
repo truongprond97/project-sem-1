@@ -37,9 +37,7 @@ const generateCartItems = (items) => {
 const onChangeQuantity = (index, event) => {
     const item = items[index]
     item.quantity = event.target.value
-    sessionStorage.setItem('cart', JSON.stringify(
-        items.map(val => ({id: val.id, quantity: +val.quantity}))
-    ))
+    sessionStorage.setItem('cart', JSON.stringify(items.map(val => ({id: val.id, quantity: +val.quantity}))))
     updateCountSession()
     updateItemTotalPrice(item, index)
     updateCartTotalPrice()
@@ -60,7 +58,9 @@ const updateCartTotalPrice = () => {
 
 const calculateTotalPrice = (items) => {
     let rs = 0
-    items.forEach(val => {rs += (val.quantity * val.price)})
+    items.forEach(val => {
+        rs += (val.quantity * val.price)
+    })
     return rs
 }
 
@@ -80,7 +80,7 @@ function init() {
     try {
         const sessionStorageCartItem = sessionStorage.getItem('cart')
         console.log(sessionStorageCartItem)
-
+        loading()
         if (sessionStorageCartItem && JSON.parse(sessionStorageCartItem) && Array.isArray(JSON.parse(sessionStorageCartItem))) {
             let sessionStorageCartItems = JSON.parse(sessionStorageCartItem)
             let totalCount = 0
@@ -89,7 +89,7 @@ function init() {
             })
 
             let data = (async function () {
-                const rawResponse = await fetch('/api/products', {
+                const rawResponse = await fetch('/api/cart', {
                     method: 'POST', headers: {
                         'Accept': 'application/json', 'Content-Type': 'application/json'
                     }, body: JSON.stringify({data: sessionStorageCartItems})
@@ -101,11 +101,16 @@ function init() {
                 if (items.length === 0) return
                 updateCartTotalPrice()
                 placeCartItem.innerHTML = generateCartItems(items)
-            })
-
+                removeLoading()
+            }).catch(
+                () => {
+                    removeLoading()
+                }
+            )
         }
     } catch (e) {
         console.error(e)
+        removeLoading()
     }
 }
 

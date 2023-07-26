@@ -4,7 +4,6 @@ let cartItems = []
 
 const emptyTemplate = `<tr><td colspan="6"><h5>No result found</h5></td></tr>`
 
-
 const updateCount = (amount = 0) => {
     count += amount
     cartCountEl.innerText = count

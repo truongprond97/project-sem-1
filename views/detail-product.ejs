@@ -38,17 +38,21 @@
                     <p class="fs-5 fw-medium fst-italic text-primary">Product detail</p>
                     <h1 class="display-6"><%= detailProduct.name %></h1>
                 </div>
-                <div class="d-flex">
-                    <span class="fw-bold">Category</span>
-                    <div class=" ml-3 badge badge-primary"><%= detailProduct.category %></div>
+                <div class="d-flex align-items-center mb-3">
+                    <span class="fw-bold fs-1/2">Category:</span>
+                    <div class=" mx-5 fst-italic"><%= detailProduct.category %></div>
                 </div>
-                <div class="d-flex">
-                    <span class="fw-bold">Branch</span>
-                    <div class="ml-3 badge badge-success"><%= detailProduct.branch %></div>
+                <div class="d-flex align-items-center mb-3">
+                    <span class="fw-bold fs-1/2">Branch:</span>
+                    <div class="mx-5 fst-italic"><%= detailProduct.branch %></div>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <span class="fw-bold fs-1/2">Price:</span>
+                    <div class="mx-5 fst-italic"><%= detailProduct.price %>$</div>
                 </div>
                 <p class="mb-4"><%= detailProduct.description %> </p>
                 <p class="mb-4"><%= detailProduct.subDescription %> </p>
-                <a href="" class="btn btn-primary rounded-pill py-3 px-5">Add to card</a>
+                <a href="javascript:void(0)" onclick="addCartItem(event, <%=detailProduct.id%>, 1)" class="btn btn-primary rounded-pill py-3 px-5">Add to card</a>
             </div>
         </div>
     </div>

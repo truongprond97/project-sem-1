@@ -1,9 +1,10 @@
 const express = require("express");
-const {getProduct} = require("../services/product.service");
+const {getProduct, getProductWithParams, mappedQueryParams} = require("../services/product.service");
+const {response} = require("express");
 const router = express.Router();
 
 
-router.post("/products", async (request, response) => {
+router.post("/cart", async (request, response) => {
     console.log(request)
     try{
 
@@ -31,6 +32,19 @@ router.post("/products", async (request, response) => {
     }
 
 
+})
+
+router.get("/products", async (request, response) => {
+    try {
+    const resData = await getProductWithParams(mappedQueryParams(request.query))
+        console.log(resData)
+        if(resData.status !== 200) throw new Error('invalid body data')
+        response.status(200).json({data : resData.data.content})
+    }catch (e) {
+        response.status(500).send({
+            message: "INTERNAL_SERVER_ERROR"
+        })
+    }
 })
 
 module.exports = router
