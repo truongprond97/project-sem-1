@@ -26,34 +26,28 @@
             <h1 class="display-6">Want to stay beauty? </h1>
         </div>
         <div class="row g-4" id="mock">
-            <% for(let index = 0; index < 4; index++) { %>
+            <%
+            if(product.length){
+            for(let index = 0; index < product.length; index++) { %>
                 <%- include('./template/store-item.template.ejs', {product: product[index], index: index}) %>
+            <%
+            }
+            }else {
+            %>
+                <div>
+                    <h4 class="text-center">Opp! No result found for. Try
+                        <a href="javascript:void(0)" onclick="resetFilter()">reset filter</a> ?
+                    </h4>
+                </div>
             <% } %>
         </div>
-        <div  class="col-12 text-center wow fadeInUp mt-3" data-wow-delay="0.1s">
+        <div class="col-12 text-center wow fadeInUp mt-3 <%= !product?.length && 'd-none' %>" data-wow-delay="0.1s">
             <a href="" id="viewMore" class="btn btn-primary rounded-pill py-3 px-5">View More Products</a>
         </div>
     </div>
 </div>
 <!-- Store End -->
 </body>
-<div id="productHidden" style="display: none;">
-    <% for(let index = 3; index < product.length; index++) { %>
-        <%- include('./template/store-item.template.ejs', {product: product[index], index: index}) %>
-    <% } %>
-</div>
-<script type="text/javascript">    
-   const buttonViewMore = document.querySelector('#viewMore'),
-         productHidden = document.querySelector('#productHidden'),
-         mock = document.querySelector('#mock')
-   buttonViewMore.addEventListener(
-    'click', (event) => {
-        event.preventDefault();
-        mock.innerHTML += productHidden.innerHTML;
-        buttonViewMore.style.display = 'none';
-    }
-   )
-</script>
 
 <%- include("footer") %>
 
