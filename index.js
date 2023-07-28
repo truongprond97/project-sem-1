@@ -5,13 +5,13 @@ const {join} = require("path");
 const morgan = require('morgan');
 const chalk  = require('chalk');
 
-const AppError = require("../src/utils/appError");
-const globalErrorHandler = require('../src/controllers/errorController');
+const AppError = require("./src/utils/appError");
+const globalErrorHandler = require('./src/controllers/errorController');
 
-const productRoute = require('../src/route/product')
-const cartRoute = require('../src/route/cart')
-const apiRoute = require('../src/route/api');
-const homeRoute = require('../src/route/customer')
+const productRoute = require('./src/route/product')
+const cartRoute = require('./src/route/cart')
+const apiRoute = require('./src/route/api');
+const homeRoute = require('./src/route/customer')
 const { log } = require('console');
 const bodyParser = require('body-parser')
 

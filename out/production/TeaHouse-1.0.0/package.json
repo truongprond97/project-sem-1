@@ -2,14 +2,14 @@
   "name": "jewlly-1.0.0",
   "version": "1.0.0",
   "description": "",
-  "main": "public/index.js",
+  "main": "index.js",
   "type": "commonjs",
   "directories": {
     "lib": "assets/lib"
   },
   "scripts": {
-    "start": "node public/index.js",
-    "watch": "nodemon --inspect public/index.js ",
+    "start": "node index.js",
+    "watch": "nodemon --inspect index.js ",
     "init": "tsc --init"
   },
   "author": "",
