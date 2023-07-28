@@ -113,11 +113,11 @@ app.use('/api', apiRoute)
 app.use('/', homeRoute)
 
 
-app.all('*', (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
-});
-
-app.use(globalErrorHandler);
+// app.all('*', (req, res, next) => {
+//   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+// });
+//
+// app.use(globalErrorHandler);
 
 app.set('view engine', 'ejs');
 

@@ -23,12 +23,9 @@
         <div class="row g-5">
             <div class="col-lg-6 fadeIn">
                 <div class="owl-carousel  wow fadeInUp" data-wow-delay="0.5s" id="detail-carousel">
-                    <% detailProduct.images.forEach(val => {
-                    %>
+                    <% detailProduct.images.forEach(val => { %>
                         <img class="img-fluid" src="<%= val %>" alt="">
-                    <%
-                    })
-                    %>
+                    <%}) %>
 
                 </div>
             </div>
@@ -68,27 +65,22 @@
     </div>
 </div>
 
-<%
-if(isShowRelateProduct) {
-%>
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="fs-5 fw-medium fst-italic text-primary">Relate product</p>
-            </div>
-            <div class="row g-4" id="mock">
-                <% for(let index = 0; index < products.length; index++) { %>
-                    <%- include('./template/store-item.template.ejs', {product: products[index], index: index}) %>
-                <% } %>
-            </div>
-            <div class="col-12 text-center wow fadeInUp mt-3" data-wow-delay="0.1s">
-                <a href="/store" id="viewMore" class="btn btn-primary rounded-pill py-3 px-5">View More Products</a>
-            </div>
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <p class="fs-5 fw-medium fst-italic text-primary">Relate product</p>
+        </div>
+        <div class="row g-4" id="mock">
+            <% for(let index = 0; index < products.length; index++) { %>
+                <%- include('./template/store-item.template.ejs', {product: products[index], index: index}) %>
+            <% } %>
+        </div>
+        <div class="col-12 text-center wow fadeInUp mt-3" data-wow-delay="0.1s">
+            <a href="/store" id="viewMore" class="btn btn-primary rounded-pill py-3 px-5">View More Products</a>
         </div>
     </div>
-<%
-}
-%>
+</div>
 
 <!-- Article End -->
 </body>
