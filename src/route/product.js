@@ -14,12 +14,10 @@ router.get("/", async (request, response) => {
         const branch = await getBranch()
         const subCategory = await getSubCategory()
         const options = {
-            product: product.data.content.slice(0,4),
-            category: category.data,
-            branch: branch.data, subCategory
+            product: product.data.content.slice(0, 4), category: category.data, branch: branch.data, subCategory
         }
         response.status(200).render('store', options)
-    }catch (e){
+    } catch (e) {
         response.status(404).render('404')
 
     }
@@ -30,14 +28,16 @@ router.get("/:id", async (request, response) => {
     try {
     const requestId = request.params['id']
     const detailProduct = await getProductDetail(requestId)
-    if(detailProduct.status !== 200){
+        detailProduct
+    if(detailProduct.status != 200){
         response.status(404).render('404')
         return
     }
     const product = await getProduct()
     const responseData = {
         detailProduct: detailProduct.data,
-        products: product.data.content.slice(0, 4)
+        products: product.data.content.slice(0, 4),
+        isShowRelateProduct: true
     }
     response.status(200).render('detail-product', responseData)
     }catch (e){
