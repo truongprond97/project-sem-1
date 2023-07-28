@@ -2,12 +2,19 @@ const fs = require('fs')
 
 const express = require('express');
 const {join} = require("path");
-const connection = require("./db.js");
+const morgan = require('morgan');
+const chalk  = require('chalk');
+
+const AppError = require("../src/utils/appError");
+const globalErrorHandler = require('../src/controllers/errorController');
 
 const productRoute = require('../src/route/product')
 const cartRoute = require('../src/route/cart')
 const apiRoute = require('../src/route/api')
 const homeRoute = require('../src/route/customer')
+const apiRoute = require('../src/route/api');
+const { log } = require('console');
+
 const app = express();
 const bodyParser = require('body-parser')
 // 1) MIDDLEWARES
@@ -17,16 +24,63 @@ const bodyParser = require('body-parser')
 // }
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json());
-app.use(express.json());
-app.use(express.static(`${__dirname}/css`));
-app.use(express.static(`${__dirname}/image`));
-app.use(express.static(`${__dirname}/js`));
-app.use(express.static(`${__dirname}/lib`));
-app.use(express.static(`${__dirname}/scss`));
 
-app.use((req, res, next) => {
-  next();
+// Define custom colors
+
+
+// Custom Morgan token to add color to status code
+morgan.token('colored-status', (req, res) => {
+
 });
+
+// Morgan middleware with colored output
+const statusColors = {
+  success: 'green',
+  redirect: 'yellow',
+  clientError: 'red',
+  serverError: 'redBright',
+};
+
+
+const coloredStatus = (req, res) => {
+  const status = res.statusCode;
+  let color;
+  if (status >= 500) {
+    color = statusColors.serverError;
+  } else if (status >= 400) {
+    color = statusColors.clientError;
+  } else if (status >= 300) {
+    color = statusColors.redirect;
+  } else {
+    color = statusColors.success;
+  }
+  return chalk[color].bold(status);
+}
+
+/**
+ *
+ * @param {Request} req
+ */
+const requestData = (req) => {
+  return `query = ${JSON.stringify(req.query)} ||  body = ${JSON.stringify(req.body)} || params = ${JSON.stringify(req.params)}`
+}
+
+app.use(
+  morgan((tokens, req, res) => {
+    const method = chalk.green(tokens.method(req, res));
+    const url = chalk.blue.bold(tokens.url(req, res));
+    const status = coloredStatus(req, res);
+    const responseTime = chalk.blueBright(tokens['response-time'](req, res) + ' ms');
+    const remoteAddress = chalk.gray(tokens['remote-addr'](req, res));
+    const dataRequest = chalk.yellow(requestData(req))
+    return `[${method}] >> ${url} :: ${status} :: ${responseTime} :: ${remoteAddress} 
+            >> Request -> ${dataRequest}
+            `;
+  })
+);
+
+app.use(express.json());
+app.use("/assets", express.static('assets'));
 
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
@@ -40,11 +94,12 @@ app.use("/assets", express.static('assets'));
 // app.get('/', (req, res) => {
 //   res.status(200).render('home');
 // })
+app.get('/', (req, res) => {
+  res.status(200).render('home');
+})
 
 app.get('/product', (req, res) => {
-  connection.query('select * from product', (err, results) => {
-    res.status(200).render('products');
-  })
+  res.status(200).render('products');
 })
 
 app.get('/contact', (req, res) => {
@@ -67,48 +122,22 @@ app.get('/about', (req, res) => {
 app.get('/404', (req, res) => {
   res.status(200).render('404');
 })
-app.use('/contact', homeRoute)
+
 app.use('/store', productRoute)
 app.use('/cart', cartRoute)
 app.use('/api', apiRoute)
 app.use('/', homeRoute)
 
 
-app.set('view engine', 'ejs');
-
-const productData = require('./products.js')
-
-app.get('/test',  (req, res) => {
-  console.log("products")
-  const  products= [{
-    image: '../assets/img/product-1.jpg',
-    imageAlt: 'Green Tea',
-    title: 'Green Tea',
-    description: 'Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum',
-
-  }, {
-    image: '../assets/img/product-2.jpg',
-    imageAlt: 'Black Tea',
-    title: 'Black Tea',
-    description: 'Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum',
-  }, {
-    image: '../assets/img/product-3.jpg',
-    imageAlt: 'Spiced Tea',
-    title: 'Spiced Tea',
-    description: 'Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum',
-  }, {
-    image: '../assets/img/product-4.jpg',
-    imageAlt: 'Organic Tea',
-    title: 'Organic Tea',
-    description: 'Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum',
-  }]
-  // productData.addProduct(products)
-
-  res.render('products', products);
+app.all('*', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
-app.use('**/**', express.static(join(__dirname, './html/404.html')));
+app.use(globalErrorHandler);
 
+app.set('view engine', 'ejs');
+
+app.use('**/**', express.static(join(__dirname, './html/404.html')));
 
 const hostName = "127.0.0.1"
 const port = 8081
