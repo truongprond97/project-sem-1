@@ -37,7 +37,8 @@ router.get("/:id", async (request, response) => {
     const product = await getProduct()
     const responseData = {
         detailProduct: detailProduct.data,
-        products: product.data.content.slice(0, 4)
+        products: product.data.content.slice(0, 4),
+        isShowRelateProduct: true
     }
     response.status(200).render('detail-product', responseData)
     }catch (e){

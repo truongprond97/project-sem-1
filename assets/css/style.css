@@ -646,7 +646,6 @@
 }
 
 .image-prod > .img {
-
     min-width: 64px;
     aspect-ratio: 1/1;
     background-repeat: no-repeat;
@@ -665,4 +664,13 @@
 
 .fs-1\/2 {
     font-size: 1.5rem;
+}
+
+.product_detail__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.product__detail_price{
+    font-size: 20px;
+    color: black;
 }
