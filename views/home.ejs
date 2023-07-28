@@ -13,7 +13,7 @@
                             <div class="col-lg-7 text-center">
                                 <p class="fs-4 text-white animated zoomIn">Welcome to <strong class="text-dark">Pascal Imitation Jewellery </strong></p>
                                 <h1 class="display-1 text-dark mb-4 animated zoomIn">Striking, Smooth  & Stunning Jewellery Production</h1>
-                                <a href="" class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Explore More</a>
+                                <a href="/store" class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Explore More</a>
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                             <div class="col-lg-7 text-center">
                                 <p class="fs-4 text-white animated zoomIn">Welcome to <strong class="text-dark">Pascal Imitation Jewellery </strong></p>
                                 <h1 class="display-1 text-dark mb-4 animated zoomIn">Striking, Smooth  & Stunning Jewellery Production</h1>
-                                <a href="" class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Explore More</a>
+                                <a href="/store" class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Explore More</a>
                             </div>
                         </div>
                     </div>
@@ -105,34 +105,39 @@
             <h1 class="display-6">Ours products</h1>
         </div>
         <div class="owl-carousel product-carousel wow fadeInUp" data-wow-delay="0.5s">
-            <a href="" class="d-block product-item rounded">
-                <img src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">
-                <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                    <h4 class="text-primary">Nhẫn</h4>
-                    <span class="text-body">Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum</span>
-                </div>
-            </a>
-            <a href="" class="d-block product-item rounded">
-                <img src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">
-                <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                    <h4 class="text-primary">Nhẫn</h4>
-                    <span class="text-body">Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum</span>
-                </div>
-            </a>
-            <a href="" class="d-block product-item rounded">
-                <img src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">
-                <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                    <h4 class="text-primary">Nhẫn</h4>
-                    <span class="text-body">Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum</span>
-                </div>
-            </a>
-            <a href="" class="d-block product-item rounded">
-                <img src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">
-                <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
-                    <h4 class="text-primary">Nhẫn</h4>
-                    <span class="text-body">Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum</span>
-                </div>
-            </a>
+
+            <% for(let index = 0; index < products.length; index++) { %>
+                <%- include('./template/home-our-product-tempate.ejs', {product: products[index], index: index}) %>
+            <% } %>
+
+<!--            <a href="" class="d-block product-item rounded">-->
+<!--                <img src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">-->
+<!--                <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">-->
+<!--                    <h4 class="text-primary">Nhẫn</h4>-->
+<!--                    <span class="text-body">Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum</span>-->
+<!--                </div>-->
+<!--            </a>-->
+<!--            <a href="" class="d-block product-item rounded">-->
+<!--                <img src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">-->
+<!--                <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">-->
+<!--                    <h4 class="text-primary">Nhẫn</h4>-->
+<!--                    <span class="text-body">Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum</span>-->
+<!--                </div>-->
+<!--            </a>-->
+<!--            <a href="" class="d-block product-item rounded">-->
+<!--                <img src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">-->
+<!--                <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">-->
+<!--                    <h4 class="text-primary">Nhẫn</h4>-->
+<!--                    <span class="text-body">Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum</span>-->
+<!--                </div>-->
+<!--            </a>-->
+<!--            <a href="" class="d-block product-item rounded">-->
+<!--                <img src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">-->
+<!--                <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">-->
+<!--                    <h4 class="text-primary">Nhẫn</h4>-->
+<!--                    <span class="text-body">Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum</span>-->
+<!--                </div>-->
+<!--            </a>-->
         </div>
     </div>
 </div>
@@ -249,71 +254,77 @@
             <h1 class="display-6">Want to stay beauty? </h1>
         </div>
         <div class="row g-4">
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="store-item position-relative text-center">
-                    <img class="img-fluid" src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">
-                    <div class="p-4">
-                        <div class="text-center mb-3">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                        </div>
-                        <h4 class="mb-3">Nature close </h4>
-                        <p>Aliqu diam amet diam et eos. Clita erat ipsum lorem erat ipsum lorem sit sed</p>
-                        <h4 class="text-primary">$19.00</h4>
-                    </div>
-                    <div class="store-overlay">
-                        <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">More Detail <i class="fa fa-arrow-right ms-2"></i></a>
-                        <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Add to Cart <i class="fa fa-cart-plus ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="store-item position-relative text-center">
-                    <img class="img-fluid" src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">
-                    <div class="p-4">
-                        <div class="text-center mb-3">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                        </div>
-                        <h4 class="mb-3">Green  tulsi</h4>
-                        <p>Aliqu diam amet diam et eos. Clita erat ipsum lorem erat ipsum lorem sit sed</p>
-                        <h4 class="text-primary">$19.00</h4>
-                    </div>
-                    <div class="store-overlay">
-                        <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">More Detail <i class="fa fa-arrow-right ms-2"></i></a>
-                        <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Add to Cart <i class="fa fa-cart-plus ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="store-item position-relative text-center">
-                    <img class="img-fluid" src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">
-                    <div class="p-4">
-                        <div class="text-center mb-3">
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                            <small class="fa fa-star text-primary"></small>
-                        </div>
-                        <h4 class="mb-3">Instant  premix</h4>
-                        <p>Aliqu diam amet diam et eos. Clita erat ipsum lorem erat ipsum lorem sit sed</p>
-                        <h4 class="text-primary">$19.00</h4>
-                    </div>
-                    <div class="store-overlay">
-                        <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">More Detail <i class="fa fa-arrow-right ms-2"></i></a>
-                        <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Add to Cart <i class="fa fa-cart-plus ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
+
+            <% for(let index = 0; index < 3; index++) { %>
+                <%- include('./template/home-product-item.template.ejs', {product: products[index], index: index}) %>
+            <% } %>
+
+
+<!--            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">-->
+<!--                <div class="store-item position-relative text-center">-->
+<!--                    <img class="img-fluid" src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">-->
+<!--                    <div class="p-4">-->
+<!--                        <div class="text-center mb-3">-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                        </div>-->
+<!--                        <h4 class="mb-3">Nature close </h4>-->
+<!--                        <p>Aliqu diam amet diam et eos. Clita erat ipsum lorem erat ipsum lorem sit sed</p>-->
+<!--                        <h4 class="text-primary">$19.00</h4>-->
+<!--                    </div>-->
+<!--                    <div class="store-overlay">-->
+<!--                        <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">More Detail <i class="fa fa-arrow-right ms-2"></i></a>-->
+<!--                        <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Add to Cart <i class="fa fa-cart-plus ms-2"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">-->
+<!--                <div class="store-item position-relative text-center">-->
+<!--                    <img class="img-fluid" src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">-->
+<!--                    <div class="p-4">-->
+<!--                        <div class="text-center mb-3">-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                        </div>-->
+<!--                        <h4 class="mb-3">Green  tulsi</h4>-->
+<!--                        <p>Aliqu diam amet diam et eos. Clita erat ipsum lorem erat ipsum lorem sit sed</p>-->
+<!--                        <h4 class="text-primary">$19.00</h4>-->
+<!--                    </div>-->
+<!--                    <div class="store-overlay">-->
+<!--                        <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">More Detail <i class="fa fa-arrow-right ms-2"></i></a>-->
+<!--                        <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Add to Cart <i class="fa fa-cart-plus ms-2"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">-->
+<!--                <div class="store-item position-relative text-center">-->
+<!--                    <img class="img-fluid" src="https://drive.google.com/uc?export=view&id=198PSk3gF0YlanqGcaEz_8LSTCuUQ_opZ" alt="">-->
+<!--                    <div class="p-4">-->
+<!--                        <div class="text-center mb-3">-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                            <small class="fa fa-star text-primary"></small>-->
+<!--                        </div>-->
+<!--                        <h4 class="mb-3">Instant  premix</h4>-->
+<!--                        <p>Aliqu diam amet diam et eos. Clita erat ipsum lorem erat ipsum lorem sit sed</p>-->
+<!--                        <h4 class="text-primary">$19.00</h4>-->
+<!--                    </div>-->
+<!--                    <div class="store-overlay">-->
+<!--                        <a href="" class="btn btn-primary rounded-pill py-2 px-4 m-2">More Detail <i class="fa fa-arrow-right ms-2"></i></a>-->
+<!--                        <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Add to Cart <i class="fa fa-cart-plus ms-2"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                <a href="" class="btn btn-primary rounded-pill py-3 px-5">View More Products</a>
+                <a href="/store" class="btn btn-primary rounded-pill py-3 px-5">View More Products</a>
             </div>
         </div>
     </div>
