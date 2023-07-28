@@ -124,7 +124,7 @@ app.set('view engine', 'ejs');
 app.use('**/**', express.static(join(__dirname, './html/404.html')));
 
 const hostName = "127.0.0.1"
-const port = 8081
+const port = process.env.PORT || 3000
 
 app.listen(port, hostName, () => {
   console.log(
