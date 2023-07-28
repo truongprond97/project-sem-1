@@ -126,21 +126,9 @@ app.use('**/**', express.static(join(__dirname, './html/404.html')));
 const hostName = "127.0.0.1"
 const port = process.env.PORT || 3000
 
-app.listen(port, hostName, () => {
+app.listen(port, () => {
   console.log(
       `Server listen on port ${port}: ${"http://" + hostName + ":" + port} `,)
 })
 
-
-const http = require('http');
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  // res.setHeader('Content-Type', 'text/html');
-  // res.end('<h1>Hello World</h1>');
-});
-
-server.listen(port,() => {
-  console.log(`Server running at port `+port);
-});
 
