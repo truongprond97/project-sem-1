@@ -80,8 +80,8 @@ function init() {
     try {
         const sessionStorageCartItem = sessionStorage.getItem('cart')
         console.log(sessionStorageCartItem)
-        loading()
         if (sessionStorageCartItem && JSON.parse(sessionStorageCartItem) && Array.isArray(JSON.parse(sessionStorageCartItem))) {
+            loading()
             let sessionStorageCartItems = JSON.parse(sessionStorageCartItem)
             let totalCount = 0
             sessionStorageCartItems.forEach(val => {

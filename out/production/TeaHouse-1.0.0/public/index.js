@@ -10,20 +10,13 @@ const globalErrorHandler = require('../src/controllers/errorController');
 
 const productRoute = require('../src/route/product')
 const cartRoute = require('../src/route/cart')
-const apiRoute = require('../src/route/api')
-const homeRoute = require('../src/route/customer')
 const apiRoute = require('../src/route/api');
+const homeRoute = require('../src/route/customer')
 const { log } = require('console');
+const bodyParser = require('body-parser')
+
 
 const app = express();
-const bodyParser = require('body-parser')
-// 1) MIDDLEWARES
-// if (process.env.NODE_ENV === 'development') {
-//   app.use(morgan('dev'));
-//
-// }
-app.use(bodyParser.urlencoded({extended:true}))
-app.use(bodyParser.json());
 
 // Define custom colors
 
@@ -58,13 +51,17 @@ const coloredStatus = (req, res) => {
 }
 
 /**
- *
- * @param {Request} req
+ * 
+ * @param {Request} req 
  */
 const requestData = (req) => {
   return `query = ${JSON.stringify(req.query)} ||  body = ${JSON.stringify(req.body)} || params = ${JSON.stringify(req.params)}`
 }
 
+
+// 1) MIDDLEWARES
+
+// Logger
 app.use(
   morgan((tokens, req, res) => {
     const method = chalk.green(tokens.method(req, res));
@@ -79,6 +76,11 @@ app.use(
   })
 );
 
+// Parser
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json());
+
+
 app.use(express.json());
 app.use("/assets", express.static('assets'));
 
@@ -89,15 +91,6 @@ app.use((req, res, next) => {
 
 // 3) ROUTES
 
-app.use("/assets", express.static('assets'));
-
-// app.get('/', (req, res) => {
-//   res.status(200).render('home');
-// })
-app.get('/', (req, res) => {
-  res.status(200).render('home');
-})
-
 app.get('/product', (req, res) => {
   res.status(200).render('products');
 })
@@ -106,15 +99,6 @@ app.get('/contact', (req, res) => {
   res.status(200).render('contact');
 })
 
-const {getMessage,postMessage} = require("../src/controllers/customer.controller");
-
-// app.get('/contact',(req,res)=>{
-//   const {name,email,subject,message} = req.body
-//   postMessage(name,email,subject,message);
-//   res.status(200).render('contact');
-// })
-
-
 app.get('/about', (req, res) => {
   res.status(200).render('about');
 })
@@ -122,7 +106,7 @@ app.get('/about', (req, res) => {
 app.get('/404', (req, res) => {
   res.status(200).render('404');
 })
-
+app.use('/contact', homeRoute)
 app.use('/store', productRoute)
 app.use('/cart', cartRoute)
 app.use('/api', apiRoute)
