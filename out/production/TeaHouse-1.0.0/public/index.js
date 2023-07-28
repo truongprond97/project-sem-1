@@ -7,15 +7,16 @@ const connection = require("./db.js");
 const productRoute = require('../src/route/product')
 const cartRoute = require('../src/route/cart')
 const apiRoute = require('../src/route/api')
-
+const homeRoute = require('../src/route/customer')
 const app = express();
-
+const bodyParser = require('body-parser')
 // 1) MIDDLEWARES
 // if (process.env.NODE_ENV === 'development') {
 //   app.use(morgan('dev'));
 //
 // }
-
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.static(`${__dirname}/css`));
 app.use(express.static(`${__dirname}/image`));
@@ -36,9 +37,9 @@ app.use((req, res, next) => {
 
 app.use("/assets", express.static('assets'));
 
-app.get('/', (req, res) => {
-  res.status(200).render('home');
-})
+// app.get('/', (req, res) => {
+//   res.status(200).render('home');
+// })
 
 app.get('/product', (req, res) => {
   connection.query('select * from product', (err, results) => {
@@ -50,6 +51,14 @@ app.get('/contact', (req, res) => {
   res.status(200).render('contact');
 })
 
+const {getMessage,postMessage} = require("../src/controllers/customer.controller");
+
+// app.get('/contact',(req,res)=>{
+//   const {name,email,subject,message} = req.body
+//   postMessage(name,email,subject,message);
+//   res.status(200).render('contact');
+// })
+
 
 app.get('/about', (req, res) => {
   res.status(200).render('about');
@@ -58,10 +67,11 @@ app.get('/about', (req, res) => {
 app.get('/404', (req, res) => {
   res.status(200).render('404');
 })
-
+app.use('/contact', homeRoute)
 app.use('/store', productRoute)
 app.use('/cart', cartRoute)
 app.use('/api', apiRoute)
+app.use('/', homeRoute)
 
 
 app.set('view engine', 'ejs');

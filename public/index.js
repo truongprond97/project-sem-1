@@ -11,7 +11,10 @@ const globalErrorHandler = require('../src/controllers/errorController');
 const productRoute = require('../src/route/product')
 const cartRoute = require('../src/route/cart')
 const apiRoute = require('../src/route/api');
+const homeRoute = require('../src/route/customer')
 const { log } = require('console');
+const bodyParser = require('body-parser')
+
 
 const app = express();
 
@@ -55,6 +58,10 @@ const requestData = (req) => {
   return `query = ${JSON.stringify(req.query)} ||  body = ${JSON.stringify(req.body)} || params = ${JSON.stringify(req.params)}`
 }
 
+
+// 1) MIDDLEWARES
+
+// Logger
 app.use(
   morgan((tokens, req, res) => {
     const method = chalk.green(tokens.method(req, res));
@@ -69,6 +76,11 @@ app.use(
   })
 );
 
+// Parser
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json());
+
+
 app.use(express.json());
 app.use("/assets", express.static('assets'));
 
@@ -78,10 +90,6 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
-
-app.get('/', (req, res) => {
-  res.status(200).render('home');
-})
 
 app.get('/product', (req, res) => {
   res.status(200).render('products');
@@ -98,10 +106,11 @@ app.get('/about', (req, res) => {
 app.get('/404', (req, res) => {
   res.status(200).render('404');
 })
-
+app.use('/contact', homeRoute)
 app.use('/store', productRoute)
 app.use('/cart', cartRoute)
 app.use('/api', apiRoute)
+app.use('/', homeRoute)
 
 
 app.all('*', (req, res, next) => {

@@ -38,7 +38,13 @@
 #spinner.show {
     transition: opacity .5s ease-out, visibility 0s linear 0s;
     visibility: visible;
-    opacity: 1;
+    opacity: 1 !important;
+}
+
+#spinner.load{
+    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    visibility: visible;
+    opacity: 0.5;
 }
 
 
@@ -655,4 +661,8 @@
 .badge-success {
     color: #fff;
     background-color: #6c757d;
+}
+
+.fs-1\/2 {
+    font-size: 1.5rem;
 }
