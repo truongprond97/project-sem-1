@@ -105,5 +105,19 @@
         }
     );
 
+     $('#detail-carousel2').owlCarousel(
+        {
+            autoplay: true,
+            smartSpeed: 1000,
+            margin: 25,
+            loop: true,
+            center: true,
+            dots: true,
+            items: 1
+        }
+    );
+
+    
+
 })(jQuery);
 

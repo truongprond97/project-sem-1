@@ -1,0 +1,102 @@
+<%- include('./header.ejs') %>
+
+    <body>
+        <!-- Page Header Start -->
+        <div class="container-fluid page-header py-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container text-center py-5">
+                <h1 class="display-2 text-dark mb-4 animated slideInDown">Compare product</h1>
+                <nav aria-label="breadcrumb animated slideInDown">
+                    <ol class="breadcrumb justify-content-center mb-0">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item text-dark" aria-current="page"><a
+                                href="/compare_product?id1=<%= productOne.id %>&id2=<%= productTwo.id  %>">Compare product</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- Page Header End -->
+
+        <!-- Products Start -->
+        <div class="container-fluid product py-5">
+            <div class="container py-5">
+                <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s"
+                    style="max-width: 700px;">
+                    <p class="fs-5 fw-medium fst-italic text-primary">
+                        Product
+                    </p>
+                    <h1 class="display-6">Compare product <%= productOne.name %> & <%= productTwo.name %></h1>
+                </div>
+                <table class="table"  summary="Compare 2 product"> 
+                    <thead>
+                        <tr>
+                            <th scope="col">Condition</th>
+                            <th scope="col">
+                                <a href="/product/<%=productOne.id%>">
+                                    <%= productOne.name %>
+                                </a>
+                            </th>
+                            <th scope="col">
+                                <a href="/product/<%=productTwo.id%>">
+                                    <%= productTwo.name %>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"></th>
+                            <td>
+                                <img class="img-fluid" src="<%=  productOne.image %>" alt="" width="200px" height="200px">
+
+                            </td>
+                            <td>
+                                <img class="img-fluid" src="<%=  productTwo.image %>" alt="" width="200px" height="200px">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Price</th>
+                            <td>
+                                <%= productOne.price %>
+                            </td>
+                            <td>
+                                <%= productTwo.price %>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Category</th>
+                            <td>
+                                <%=productOne.category%>
+                            </td>
+                            <td>
+                                <%=productTwo.category%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Branch</th>
+                            <td>
+                                <%=productOne.branch %>
+                            </td>
+                            <td>
+                                <%=productTwo.branch %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Sub category</th>
+                            <td>
+                                <%=productOne.subCategory %>
+                            </td>
+                            <td>
+                                <%=productTwo.subCategory %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Products End -->
+    </body>
+
+    <%- include('./footer.ejs') %>

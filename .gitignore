@@ -4,7 +4,7 @@
 
 node_modules
 
-/out
+out/*
 
 .idea/jsLibraryMappings.xml
 

@@ -12,6 +12,8 @@ const productRoute = require('./src/route/product')
 const cartRoute = require('./src/route/cart')
 const apiRoute = require('./src/route/api');
 const homeRoute = require('./src/route/customer')
+const compareProductRoute = require('./src/route/compare-product')
+
 const { log } = require('console');
 const bodyParser = require('body-parser')
 
@@ -111,13 +113,7 @@ app.use('/store', productRoute)
 app.use('/cart', cartRoute)
 app.use('/api', apiRoute)
 app.use('/', homeRoute)
-
-
-// app.all('*', (req, res, next) => {
-//   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
-// });
-//
-// app.use(globalErrorHandler);
+app.use('/compare-product', compareProductRoute )
 
 app.set('view engine', 'ejs');
 
