@@ -8,6 +8,7 @@ const chalk  = require('chalk');
 const AppError = require("./src/utils/appError");
 const globalErrorHandler = require('./src/controllers/errorController');
 
+const galleryRoute = require('./src/route/gallery')
 const productRoute = require('./src/route/product')
 const cartRoute = require('./src/route/cart')
 const apiRoute = require('./src/route/api');
@@ -93,9 +94,9 @@ app.use((req, res, next) => {
 
 // 3) ROUTES
 
-app.get('/product', (req, res) => {
-  res.status(200).render('products');
-})
+// app.get('/product', (req, res) => {
+//   res.status(200).render('products');
+// })
 
 app.get('/contact', (req, res) => {
   res.status(200).render('contact');
@@ -109,6 +110,7 @@ app.get('/404', (req, res) => {
   res.status(200).render('404');
 })
 app.use('/contact', homeRoute)
+app.use('/product', galleryRoute)
 app.use('/store', productRoute)
 app.use('/cart', cartRoute)
 app.use('/api', apiRoute)
