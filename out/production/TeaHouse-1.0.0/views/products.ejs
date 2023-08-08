@@ -28,8 +28,8 @@
             <h1 class="display-6">Ours products</h1>
         </div>
         <div class="owl-carousel product-carousel wow fadeInUp" data-wow-delay="0.5s">
-            <% for(let index = 0; index < products.length; index++) { %>
-                <%- include('./template/home-our-product-tempate.ejs', {product: products[index], index: index}) %>
+            <% for(let index = 0; index < product.length; index++) { %>
+                <%- include('./template/home-our-product-tempate.ejs', {product: product[index], index: index}) %>
             <% } %>
 
 <!--            <a href="" class="d-block product-item rounded">-->
